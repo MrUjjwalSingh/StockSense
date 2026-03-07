@@ -1,18 +1,34 @@
-'use client';
+'use client'
 
-import React, { useEffect, useRef, memo } from 'react';
+import useTradingviewWidget from '@/hooks/useTradingviewWidget'
+import React, { memo } from 'react'
 
-const TradingViewWidget= () => {
-  const container = useRef(null);
-
-  
-
-  return (
-    <div className="tradingview-widget-container" ref={container} style={{ height: "100%", width: "100%" }}>
-      <div className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></div>
-      <div className="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/NASDAQ-AAPL/" rel="noopener nofollow" target="_blank"><span className="blue-text">AAPL stock chart</span></a><span className="trademark"> by TradingView</span></div>
-    </div>
-  );
+interface TradingViewWidgetProps {
+  title?: string
+  scriptUrl: string
+  config: Record<string, unknown>
+  height?: number
+  className?: string
 }
 
-export default memo(TradingViewWidget);
+const TradingViewWidget = ({
+  title,
+  scriptUrl,
+  config,
+  height = 600,
+  className = ''
+}: TradingViewWidgetProps) => {
+  const containerRef = useTradingviewWidget(scriptUrl, config, height)
+
+  return (
+    <div className={`w-full ${className}`}>
+      {title && <h2 className="mb-4 text-xl font-semibold">{title}</h2>}
+      <div ref={containerRef} className="tradingview-widget-container">
+        <div className="tradingview-widget-container_widget" style={{height , width:"100%"}}></div>
+      </div>
+
+    </div>
+  )
+}
+
+export default memo(TradingViewWidget)
