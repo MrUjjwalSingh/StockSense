@@ -19,17 +19,19 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
 import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
 import Navitems from "./Navitems";
+import { signOut } from "@/lib/actions/auth.actions";
 
-
-export function UserDropdown() {
+export function UserDropdown({user}:{user:User}) {
 
   const router = useRouter();
   
   const handleSignOut = async()=>{
+    await signOut();
     router.push("/signOut");
+
   }
 
-  const user = {name:"Ben Tennyson"  , email :'saviour@gmail.com'}
+  
 
   return (
     <DropdownMenu>
