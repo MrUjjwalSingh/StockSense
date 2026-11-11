@@ -21,7 +21,7 @@ import { LogOut } from "lucide-react";
 import Navitems from "./Navitems";
 import { signOut } from "@/lib/actions/auth.actions";
 
-export function UserDropdown({user}:{user:User}) {
+export function UserDropdown({user,initialStocks}:{user:User,initialStocks:StockWithWatchlistStatus[]}) {
 
   const router = useRouter();
   
@@ -77,7 +77,7 @@ export function UserDropdown({user}:{user:User}) {
           <DropdownMenuSeparator className="hidden sm:block bg-gray-600"/>
 
           <nav className="sm:hidden">
-            <Navitems/>
+            <Navitems initialStocks={initialStocks} />
 
           </nav>
       </DropdownMenuContent>
